@@ -1,5 +1,6 @@
 package com.minhazul;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -9,31 +10,35 @@ import jakarta.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
+import org.jboss.logging.Logger;
 
 @Path("/api/books")
 @Produces(MediaType.APPLICATION_JSON)
 public class BookResource {
 
+    @Inject
+    BookRepository repository;
+    @Inject
+    Logger logger;
+
     @GET
     public List<Book> getAllBooks() {
-        return List.of(
-                new Book(1, "Test Book 1", "Random", 2020, "IT"),
-                new Book(1, "Test Book 2", "Random", 2021, "IT"),
-                new Book(1, "Test Book 3", "Random", 2022, "IT"),
-                new Book(1, "Test Book 4", "Random", 2023, "IT")
-        );
+        logger.info("Getting all books");
+        return this.repository.getAllBooks();
     }
 
     @GET
     @Path("/count")
     @Produces(MediaType.TEXT_PLAIN)
     public int countAllBooks(){
-        return getAllBooks().size();
+        logger.info("Getting book count");
+        return this.repository.countAllBooks();
     }
 
     @GET
     @Path("{id}")
     public Optional<Book> getBook(@PathParam("id") int id){
-        return getAllBooks().stream().filter(book -> book.id == id).findFirst();
+        logger.info("Getting book by id");
+        return this.repository.getBook(id);
     }
 }
