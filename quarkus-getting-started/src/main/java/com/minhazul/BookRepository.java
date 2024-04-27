@@ -15,9 +15,9 @@ public class BookRepository {
     public List<Book> getAllBooks() {
         return List.of(
                 new Book(1, "Test Book 1", "Random", 2020, "IT"),
-                new Book(1, "Test Book 2", "Random", 2021, "IT"),
-                new Book(1, "Test Book 3", "Random", 2022, "IT"),
-                new Book(1, "Test Book 4", "Random", 2023, "IT")
+                new Book(2, "Test Book 2", "Random", 2021, "IT"),
+                new Book(3, "Test Book 3", "Random", 2022, "IT"),
+                new Book(4, "Test Book 4", "Random", 2023, "IT")
         );
     }
 
